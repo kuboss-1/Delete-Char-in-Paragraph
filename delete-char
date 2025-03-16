@@ -1,0 +1,45 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    char paragraph[10000];
+    char deleted_char[100];
+
+    cout << "Please enter your paragraph: ";
+    cin.getline(paragraph, 10000);
+
+    cout << "Please enter the characters you want to erase: ";
+    cin.getline(deleted_char, 100);
+
+    int index = 0;
+    for (int i = 0; paragraph[i] != '\0'; ++i)
+    {
+        bool erased = false;
+        for (int j = 0; deleted_char[j] != '\0'; ++j)
+        {
+            char a = paragraph[i];
+            char b = deleted_char[j];
+
+            if (a >= 'a' && a <= 'z')
+                a -= 32;
+            if (b >= 'a' && b <= 'z')
+                b -= 32;
+
+            if (a == b)
+            {
+                erased = true;
+                break;
+            }
+        }
+
+        if (!erased)
+            paragraph[index++] = paragraph[i];
+    }
+
+    paragraph[index] = '\0';
+    cout << paragraph << endl;
+
+    return 0;
+}
